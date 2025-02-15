@@ -1,12 +1,21 @@
-import React, { useRef, useEffect, use } from "react";
+import { useMotionValue, useSpring, useMotionValueEvent } from "motion/react";
+import React, { useRef, useEffect } from "react";
 
 function Counter({ value }) {
   const ref = useRef(null);
-  useEffect(() => {
+  const motionCount = useMotionValue(0);
+  const springCount = useSpring(motionCount);
+
+  //no need to use useEffect + springCount.on...+cleanup function
+  useMotionValueEvent(springCount, "change", (latest) => {
     if (ref.current) {
-      ref.current.textContent = value;
+      ref.current.textContent = latest.toFixed(0);
     }
-  }, [value]);
+  });
+
+  useEffect(() => {
+    motionCount.set(value);
+  }, [value, motionCount]);
 
   return <span ref={ref}></span>;
 }
