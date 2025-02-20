@@ -8,6 +8,7 @@ function App() {
         <div>
           <Counter from={0} to={90000} />
         </div>
+
         <div>
           <Counter
             from={0}
@@ -15,6 +16,33 @@ function App() {
             formatter={(value) =>
               Intl.NumberFormat("en-US").format(value.toFixed(0))
             }
+          />
+        </div>
+
+        <div>
+          <Counter
+            from={0}
+            to={90000}
+            formatter={(value) =>
+              Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(value.toFixed(2))
+            }
+          />
+        </div>
+        <div>
+          <Counter
+            from={0}
+            to={90000}
+            formatter={(value) => `${value.toFixed(0)} clicks`}
+          />
+        </div>
+        <div>
+          <Counter
+            from={0}
+            to={100}
+            formatter={(value) => `${value.toFixed(1)}%`}
           />
         </div>
       </div>
