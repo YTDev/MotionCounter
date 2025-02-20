@@ -3,9 +3,20 @@ import Counter from "./Counter";
 function App() {
   return (
     <>
-      <div className="h-screen flex items-center justify-center bg-gray-900 text-white text-3xl flex-1">
+      <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white text-3xl flex-1">
         {/* <Counter value={90000} /> */}
-        <Counter from={0} to={90000} />
+        <div>
+          <Counter from={0} to={90000} />
+        </div>
+        <div>
+          <Counter
+            from={0}
+            to={90000}
+            formatter={(value) =>
+              Intl.NumberFormat("en-US").format(value.toFixed(0))
+            }
+          />
+        </div>
       </div>
 
       <div className="h-screen flex items-center justify-center bg-blue-950 text-white text-3xl flex-1">

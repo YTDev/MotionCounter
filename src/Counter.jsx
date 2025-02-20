@@ -13,6 +13,7 @@ function Counter({
   type = "spring",
   springOptions = { damping: 80, stiffness: 160 },
   tweenOptions = { duration: 2, easing: "easeInOut" },
+  formatter = (value) => value.toFixed(0),
 }) {
   const ref = useRef(null);
   const motionCount = useMotionValue(from);
@@ -38,9 +39,10 @@ function Counter({
 
   useMotionValueEvent(animatedValue, "change", (latest) => {
     if (ref.current) {
-      ref.current.textContent = Intl.NumberFormat("en-US").format(
-        latest.toFixed(0)
-      );
+      // ref.current.textContent = Intl.NumberFormat("en-US").format(
+      //   latest.toFixed(0)
+      // );
+      ref.current.textContent = formatter(latest);
     }
   });
 
