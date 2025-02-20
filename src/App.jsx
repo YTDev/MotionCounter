@@ -6,7 +6,12 @@ function App() {
       <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white text-3xl flex-1">
         {/* <Counter value={90000} /> */}
         <div>
-          <Counter from={0} to={90000} />
+          <Counter
+            from={0}
+            to={90000}
+            inViewOptions={{ once: false }}
+            className="text-green-500"
+          />
         </div>
 
         <div>

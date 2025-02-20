@@ -14,6 +14,9 @@ function Counter({
   springOptions = { damping: 80, stiffness: 160 },
   tweenOptions = { duration: 2, easing: "easeInOut" },
   formatter = (value) => value.toFixed(0),
+  style = {},
+  className = {},
+  inViewOptions = { once: true },
 }) {
   const ref = useRef(null);
   const motionCount = useMotionValue(from);
@@ -27,7 +30,7 @@ function Counter({
   const animatedValue =
     type === "spring" ? useSpring(motionCount, springOptions) : motionCount;
 
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, inViewOptions);
   //no need to use useEffect + springCount.on...+ cleanup function
   // useMotionValueEvent(springCount, "change", (latest) => {
   //   if (ref.current) {
@@ -64,10 +67,12 @@ function Counter({
       } else if (type === "tween") {
         animate(motionCount, to, tweenOptions);
       }
+    } else {
+      motionCount.set(from);
     }
-  }, [to, isInView, type, tweenOptions, motionCount]);
+  }, [from, to, isInView, type, tweenOptions, motionCount]);
 
-  return <span ref={ref}></span>;
+  return <span ref={ref} style={style} className={className}></span>;
 }
 
 export default Counter;
