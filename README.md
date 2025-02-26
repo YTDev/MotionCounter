@@ -1,6 +1,8 @@
 # MotionCounter
 
 **MotionCounter** is a React component library for animated counters.
+https://www.npmjs.com/package/motioncounter
+
 ## Installation
 
 Install via npm:
