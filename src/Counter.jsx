@@ -18,6 +18,7 @@ function Counter({
   style = {},
   className = {},
   inViewOptions = { once: true },
+  onAnimationStart,
 }) {
   const ref = useRef(null);
   const motionCount = useMotionValue(from);
@@ -39,6 +40,9 @@ function Counter({
 
   useEffect(() => {
     if (isInView) {
+      if (onAnimationStart) {
+        onAnimationStart();
+      }
       if (type === "spring") {
         //this line should start the spring animation
         motionCount.set(to);
@@ -48,7 +52,7 @@ function Counter({
     } else {
       motionCount.set(from);
     }
-  }, [from, to, isInView, type, tweenOptions, motionCount]);
+  }, [from, to, isInView, type, tweenOptions, motionCount, onAnimationStart]);
 
   return <span ref={ref} style={style} className={className}></span>;
 }

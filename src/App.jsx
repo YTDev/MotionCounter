@@ -58,6 +58,9 @@ function App() {
           formatter={(value) =>
             Intl.NumberFormat("en-US").format(value.toFixed(0))
           }
+          onAnimationStart={() =>
+            console.log("The blue div animation has started!")
+          }
         />
         {/* <Counter value={90000} /> */}
       </div>
