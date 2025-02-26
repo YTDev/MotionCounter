@@ -3,25 +3,22 @@ import Counter from "./Counter";
 function App() {
   return (
     <>
-      <div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white text-3xl flex-1">
+      <div className="h-screen flex flex-col items-center justify-center bg-black text-white text-3xl flex-1">
         {/* <Counter value={90000} /> */}
         <div>
           <Counter
             from={0}
-            to={90000}
+            to={99999}
             inViewOptions={{ once: false }}
             className="text-green-500"
-          />
-        </div>
-
-        <div>
-          <Counter
-            from={0}
-            to={90000}
             formatter={(value) =>
               Intl.NumberFormat("en-US").format(value.toFixed(0))
             }
           />
+        </div>
+
+        <div>
+          <Counter from={0} to={90000} />
         </div>
 
         <div>
@@ -31,7 +28,7 @@ function App() {
             formatter={(value) =>
               Intl.NumberFormat("en-US", {
                 style: "currency",
-                currency: "USD",
+                currency: "EUR",
               }).format(value.toFixed(2))
             }
           />
@@ -58,13 +55,16 @@ function App() {
           to={0}
           type="spring"
           springOptions={{ damping: 100, stiffness: 160 }}
+          formatter={(value) =>
+            Intl.NumberFormat("en-US").format(value.toFixed(0))
+          }
         />
         {/* <Counter value={90000} /> */}
       </div>
       <div className="h-screen flex items-center justify-center bg-black text-white text-3xl flex-1">
         <Counter
           from={0}
-          to={90000}
+          to={-90000}
           type="tween"
           tweenOptions={{ duration: 3, easing: "easeInOut" }}
         />

@@ -7,6 +7,7 @@ import {
 } from "motion/react";
 import React, { useRef, useEffect } from "react";
 
+//control the oscillation to avoid dippin below 0 !
 function Counter({
   from = 0,
   to,
@@ -21,25 +22,12 @@ function Counter({
   const ref = useRef(null);
   const motionCount = useMotionValue(from);
 
-  //control the oscillation to avoid dippin below 0
-  // const springCount = useSpring(motionCount, {
-  //   damping: 80,
-  //   stiffness: 160,
-  // });
-
   const animatedValue =
     type === "spring" ? useSpring(motionCount, springOptions) : motionCount;
 
   const isInView = useInView(ref, inViewOptions);
-  //no need to use useEffect + springCount.on...+ cleanup function
-  // useMotionValueEvent(springCount, "change", (latest) => {
-  //   if (ref.current) {
-  //     ref.current.textContent = Intl.NumberFormat("en-US").format(
-  //       latest.toFixed(0)
-  //     );
-  //   }
-  // });
 
+  //no need to use useEffect + springCount.on...+ cleanup function
   useMotionValueEvent(animatedValue, "change", (latest) => {
     if (ref.current) {
       // ref.current.textContent = Intl.NumberFormat("en-US").format(
@@ -49,20 +37,10 @@ function Counter({
     }
   });
 
-  // useEffect(() => {
-  //   console.log("element in view: ", isInView);
-  // }, [isInView]);
-
-  // useEffect(() => {
-  //   if (isInView) {
-  //     //this line should start the spring animation
-  //     motionCount.set(to);
-  //   }
-  // }, [to, motionCount, isInView]);
-
   useEffect(() => {
     if (isInView) {
       if (type === "spring") {
+        //this line should start the spring animation
         motionCount.set(to);
       } else if (type === "tween") {
         animate(motionCount, to, tweenOptions);
