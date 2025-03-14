@@ -18,3 +18,6 @@ npm install motioncounter
 import { Counter } from "motioncounter";
 ```
 For more examples cf. demo folder
+
+## Requirements
+This library is built and tested with React 19.0.0 and ReactDOM 19.0.0 or later. Please ensure your project meets these requirements.
